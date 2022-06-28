@@ -17,13 +17,13 @@ m3 = multiples_of(3)
 m3_under30 = m3(30)
 m7_under30 = multiples_of(7)(30)
 
-print(type(m3_under30))
-# output: <class 'generator'>
+# print(type(m3_under30))
+# # output: <class 'generator'>
 
-print(*m3_under30)
-# output: 3 6 9 12 15 18 21 24 27
+# print(*m3_under30)
+# # output: 3 6 9 12 15 18 21 24 27
 
-print(*m7_under30)
+# print(*m7_under30)
 # output: 7 14 21 28
 # ----------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ print(*m7_under30)
 
 def make_upper(func):
     def wrapper(*args):
-        result = func(*args)
+        result = func(*args).upper()
         return result
     return wrapper
 
