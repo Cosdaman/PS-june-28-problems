@@ -123,35 +123,40 @@ def square(n):
 
 # pass in a string
 
-def check_return_type(*args, **kwargs):
-    def wrapper(func):
-        result = func(2.5)
-        if not type(result) == args[0]:
-            print(f'The return type is NOT {args[0]}')
-        else:
-            print(f'The return type is {args[0]}')
-        return func
-    return wrapper
+# decorator arguments
+def check_return_type(*args):
+    # function
+    def inner(func):
+        # function arguments
+        def wrapper(*args2):
+            result = func(args2[0])
+            if not type(result) == args[0]:
+                print(f'The return type is NOT {args[0]}')
+            else:
+                print(f'The return type is {args[0]}')
+            return func(*args2)
+        return wrapper
+    return inner
 
 
-# @check_return_type(str)
+@check_return_type(str)
 def square(n):
     return n ** 2
 
 
-# print(square(6))  # output: =========Error!!
+print(square(6))  # output: =========Error!!
 # The return type is NOT <class 'str'>
 # 36
 
 # pass in a float
 
 
-# @check_return_type(float)
+@check_return_type(float)
 def square(n):
     return n ** 2
 
 
-# print(square(2.9))  # output: The return type is <class 'float'>
+print(square(2.9))  # output: The return type is <class 'float'>
 # 8.41
 # ------------------------------------------------------------------------
 
