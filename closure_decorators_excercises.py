@@ -4,6 +4,9 @@
 # Using a closure, create a function, multiples_of(n) which we can use to
 # create generators that generate multiples of n less than a given number.
 
+from unittest import result
+
+
 def multiples_of(num):
     def limit(max):
         i = 1
@@ -65,7 +68,7 @@ def my_func():
     print('Python is fun!!')
 
 
-my_func()  # output: my_func is running...
+# my_func()  # output: my_func is running...
 #Python is fun
 # ----------------------------------------------------------------------
 
@@ -74,6 +77,15 @@ my_func()  # output: my_func is running...
 # returned from the decorated function.
 
 
+def give_name(*args, **kwargs):
+    def wrapper(func):
+        result = func
+        print(result() + ' '+args[0])
+        return result
+    return wrapper
+
+
+@give_name('Theresa')
 def greeting():
     return 'Hello'
 
