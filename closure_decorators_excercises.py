@@ -80,7 +80,7 @@ def my_func():
 def give_name(*args, **kwargs):
     def wrapper(func):
         result = func
-        print(result() + ' '+args[0])
+        # print(result() + ' '+args[0])
         return result
     return wrapper
 
@@ -89,8 +89,9 @@ def give_name(*args, **kwargs):
 def greeting():
     return 'Hello'
 
+# this confuses me
 
-print(greeting())  # output: Hello Theresa
+# print(greeting())  # output: Hello Theresa
 # ---------------------------------------------------------------------
 
 # Decorators Excercise 4
@@ -98,11 +99,20 @@ print(greeting())  # output: Hello Theresa
 # executing the decorated function.
 
 
+def print_input_type(func):
+    def wrapper(*args):
+        print(type(args[0]))
+        result = func(args[0])
+        return result
+    return wrapper
+
+
+@print_input_type
 def square(n):
     return n ** 2
 
 
-print(square(3.5))  # output: The input data type is <class 'float'>
+# print(square(3.5))  # output: The input data type is <class 'float'>
 # 12.25
 # -------------------------------------------------------------------
 
