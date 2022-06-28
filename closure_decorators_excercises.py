@@ -79,9 +79,9 @@ def my_func():
 
 def give_name(*args, **kwargs):
     def wrapper(func):
-        result = func
-        # print(result() + ' '+args[0])
-        return result
+        def inner(*args2):
+            return f'{func()} {args[0]}'
+        return inner
     return wrapper
 
 
@@ -91,7 +91,8 @@ def greeting():
 
 # this confuses me
 
-# print(greeting())  # output: Hello Theresa
+
+print(greeting())  # output: Hello Theresa
 # ---------------------------------------------------------------------
 
 # Decorators Excercise 4
@@ -101,7 +102,7 @@ def greeting():
 
 def print_input_type(func):
     def wrapper(*args):
-        print(type(args[0]))
+        print(f'The input data type is {type(args[0])}')
         result = func(args[0])
         return result
     return wrapper
@@ -112,7 +113,7 @@ def square(n):
     return n ** 2
 
 
-# print(square(3.5))  # output: The input data type is <class 'float'>
+print(square(3.5))  # output: The input data type is <class 'float'>
 # 12.25
 # -------------------------------------------------------------------
 
@@ -124,6 +125,8 @@ def square(n):
 # pass in a string
 
 # decorator arguments
+
+
 def check_return_type(*args):
     # function
     def inner(func):
