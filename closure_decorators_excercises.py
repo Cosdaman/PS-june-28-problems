@@ -4,7 +4,7 @@
 # Using a closure, create a function, multiples_of(n) which we can use to
 # create generators that generate multiples of n less than a given number.
 
-from unittest import result
+from datetime import datetime
 
 
 def multiples_of(num):
@@ -123,23 +123,35 @@ def square(n):
 
 # pass in a string
 
+def check_return_type(*args, **kwargs):
+    def wrapper(func):
+        result = func(2.5)
+        if not type(result) == args[0]:
+            print(f'The return type is NOT {args[0]}')
+        else:
+            print(f'The return type is {args[0]}')
+        return func
+    return wrapper
 
+
+# @check_return_type(str)
 def square(n):
     return n ** 2
 
 
-print(square(6))  # output: =========Error!!
+# print(square(6))  # output: =========Error!!
 # The return type is NOT <class 'str'>
 # 36
 
 # pass in a float
 
 
+# @check_return_type(float)
 def square(n):
     return n ** 2
 
 
-print(square(2.9))  # output: The return type is <class 'float'>
+# print(square(2.9))  # output: The return type is <class 'float'>
 # 8.41
 # ------------------------------------------------------------------------
 
@@ -147,6 +159,13 @@ print(square(2.9))  # output: The return type is <class 'float'>
 # @execute_log – write a function execution log on the log file. (log below)
 
 
+def execute_log(func):
+    def wrapper(*args):
+        return str(datetime.now()) + ' ' + func.__name__
+    return wrapper
+
+
+@execute_log
 def multiply(*nums):
     mult = 1
     for n in nums:
@@ -154,6 +173,7 @@ def multiply(*nums):
     return mult
 
 
+@execute_log
 def hello_world():
     return 'hello world!!'
 
