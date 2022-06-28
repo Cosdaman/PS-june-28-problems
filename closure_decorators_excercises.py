@@ -44,7 +44,7 @@ def hello_world():
     return 'hello young, good day!!'
 
 
-print(hello_world())  # output: HELLO YOUNG, GOOD DAY!!
+# print(hello_world())  # output: HELLO YOUNG, GOOD DAY!!
 # -----------------------------------------------------------------------
 
 # Decorators Excercise 2
@@ -52,6 +52,15 @@ print(hello_world())  # output: HELLO YOUNG, GOOD DAY!!
 # executing the function.
 
 
+def print_func_name(func):
+    def wrapper(*args):
+        print(f'{func.__name__} is running...')
+        result = func()
+        return result
+    return wrapper
+
+
+@print_func_name
 def my_func():
     print('Python is fun!!')
 
