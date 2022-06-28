@@ -158,7 +158,6 @@ print(square(6))  # output: =========Error!!
 def square(n):
     return n ** 2
 
-
 print(square(2.9))  # output: The return type is <class 'float'>
 # 8.41
 # ------------------------------------------------------------------------
